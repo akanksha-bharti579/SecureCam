@@ -1,0 +1,54 @@
+{
+  "alg": "scfp1",
+  "cosSum": 131072,
+  "vectors": [
+    {
+      "w": 257,
+      "h": 193,
+      "seed": 1,
+      "rot": 0,
+      "phash": "9335ba554a31ad5a",
+      "thumbSha256": "dd68d20e996fb2f801ebced0a64973542ba24e34cc6f4a5d45e50948639733df"
+    },
+    {
+      "w": 640,
+      "h": 480,
+      "seed": 42,
+      "rot": 90,
+      "phash": "d06f213effc07b00",
+      "thumbSha256": "b7ad31d656ced0e78fd12ff1683e29c73fa72d1d2f63c05088a29c1e8419d89b"
+    },
+    {
+      "w": 130,
+      "h": 901,
+      "seed": 7,
+      "rot": 270,
+      "phash": "808f95d05fd0b5b5",
+      "thumbSha256": "9215ff91870012ca79af896a30e1d56bbf4f0a008c7a91e4115ae2f9f090a406"
+    },
+    {
+      "w": 128,
+      "h": 128,
+      "seed": 99,
+      "rot": 180,
+      "phash": "d7979bc0ecf86088",
+      "thumbSha256": "73eefce5c8c89286612bf76e3c5aecb047c867aa1f60827cf35fe4bad7df7718"
+    },
+    {
+      "w": 1000,
+      "h": 750,
+      "seed": 2024,
+      "rot": 0,
+      "phash": "8a1c0b37f1754337",
+      "thumbSha256": "232309bce16b1e0993e2648d5b0220d58043ecef03b638a9e69fae3cfa4705f2"
+    },
+    {
+      "w": 333,
+      "h": 1024,
+      "seed": -123456789,
+      "rot": 90,
+      "phash": "f748679c26689371",
+      "thumbSha256": "706c7e0a55333d741207b919b4a23c678630a83b24ac505e3b5a8102c759cd8a"
+    }
+  ]
+}

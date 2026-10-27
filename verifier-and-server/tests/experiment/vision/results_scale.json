@@ -1,0 +1,36 @@
+{
+ "lookup": [
+  {
+   "records": 1000,
+   "currentMs": 21.94111999999732,
+   "packedMs": 0.24986499999649822
+  },
+  {
+   "records": 10000,
+   "currentMs": 195.30492000002414,
+   "packedMs": 1.3945449999999255
+  },
+  {
+   "records": 100000,
+   "currentMs": 1675.5537499999627,
+   "packedMs": 13.130945000005886
+  },
+  {
+   "records": 1000000,
+   "currentMs": null,
+   "packedMs": 139.86415999997408
+  }
+ ],
+ "candidates": {
+  "pairs": 999000,
+  "byGlobal": 34,
+  "byQuads": 2,
+  "either": 34,
+  "rate": 0.000034034034034034034
+ },
+ "perCandidate": {
+  "verifyMs": 0.25584400000050667,
+  "compareMs": 0.999144999999553,
+  "compareStrictMs": 1.9642645000014454
+ }
+}

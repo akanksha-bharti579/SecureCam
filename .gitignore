@@ -1,0 +1,24 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Android / Gradle
+.gradle/
+build/
+*/build/
+captures/
+.cxx/
+local.properties
+*.iml
+.idea/
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Log files
+*.log

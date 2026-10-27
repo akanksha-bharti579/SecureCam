@@ -1,0 +1,117 @@
+{
+ "1d98e79024ec446b2618ea787ec15c08a4b434fa875e6906d5d5884f62546399": {
+  "ok": true,
+  "reasons": [],
+  "warnings": [],
+  "details": {
+   "chainLength": 4,
+   "root": "serialNumber=f92009e853b6b045",
+   "revocationChecked": true,
+   "attestationVersion": 3,
+   "securityLevel": "StrongBox",
+   "keyMintSecurityLevel": "StrongBox",
+   "osVersion": 170000,
+   "osPatchLevel": 202608,
+   "verifiedBootState": "Verified",
+   "deviceLocked": true,
+   "packages": [
+    "com.example.securecam"
+   ],
+   "signatureDigests": [
+    "1bc2c07cc564d2e5f044bc7bb8d4ca4d397d3defa874b97410ef69b22827d8f8"
+   ]
+  },
+  "checkedAt": "2026-09-28T16:17:00.056Z"
+ },
+ "680a4536dcf83a8cc90173b8f02bd71ec7aeb5c3754cd66f903046d4ef1376ee": {
+  "ok": false,
+  "reasons": [
+   "no attestation chain supplied"
+  ],
+  "warnings": [],
+  "details": {},
+  "checkedAt": "2026-09-28T16:29:52.220Z"
+ },
+ "d3693979465b37157a3cdbbe88129272ef1e535d6709ac6c5c4bf9a4bc498a34": {
+  "ok": false,
+  "reasons": [
+   "no attestation chain supplied"
+  ],
+  "warnings": [],
+  "details": {},
+  "checkedAt": "2026-09-28T16:31:43.458Z"
+ },
+ "52a14c5c3386c0fe0732717b3a798b2432364ecd89df6fae5777cf230b0d258f": {
+  "ok": false,
+  "reasons": [
+   "no attestation chain supplied"
+  ],
+  "warnings": [],
+  "details": {},
+  "checkedAt": "2026-10-16T16:56:46.935Z"
+ },
+ "31c2a6bb60acb89176af5c515de408a1e1174ee1c3530216b51a6632b0c64319": {
+  "ok": true,
+  "reasons": [],
+  "warnings": [
+   "the device sent an expired copy of the Google root (valid to May 24 16:28:52 2026 GMT); trusted by its key"
+  ],
+  "details": {
+   "chainLength": 4,
+   "root": "serialNumber=f92009e853b6b045",
+   "chain": [
+    {
+     "org": "",
+     "name": "f92009e853b6b045",
+     "text": "serialNumber=f92009e853b6b045",
+     "issuer": "serialNumber=f92009e853b6b045",
+     "role": "root",
+     "validFrom": "May 26 16:28:52 2016 GMT",
+     "validTo": "May 24 16:28:52 2026 GMT"
+    },
+    {
+     "org": "",
+     "name": "TEE",
+     "text": "serialNumber=8d818b3444f12fa3, title=TEE",
+     "issuer": "serialNumber=f92009e853b6b045",
+     "role": "intermediate",
+     "validFrom": "Nov 12 00:35:30 2019 GMT",
+     "validTo": "Nov  9 00:35:30 2029 GMT"
+    },
+    {
+     "org": "",
+     "name": "TEE",
+     "text": "serialNumber=11649bc1ab1a823d, title=TEE",
+     "issuer": "serialNumber=8d818b3444f12fa3, title=TEE",
+     "role": "intermediate",
+     "validFrom": "Nov 12 00:54:19 2019 GMT",
+     "validTo": "Nov  9 00:54:19 2029 GMT"
+    },
+    {
+     "org": "",
+     "name": "Android Keystore Key",
+     "text": "CN=Android Keystore Key",
+     "issuer": "serialNumber=11649bc1ab1a823d, title=TEE",
+     "role": "key",
+     "validFrom": "Jan  1 00:00:00 1970 GMT",
+     "validTo": "Dec 31 23:59:59 2049 GMT"
+    }
+   ],
+   "revocationChecked": true,
+   "attestationVersion": 3,
+   "securityLevel": "TrustedEnvironment",
+   "keyMintSecurityLevel": "TrustedEnvironment",
+   "osVersion": 130000,
+   "osPatchLevel": 202407,
+   "verifiedBootState": "Verified",
+   "deviceLocked": true,
+   "packages": [
+    "com.example.securecam"
+   ],
+   "signatureDigests": [
+    "1bc2c07cc564d2e5f044bc7bb8d4ca4d397d3defa874b97410ef69b22827d8f8"
+   ]
+  },
+  "checkedAt": "2026-10-19T16:30:43.141Z"
+ }
+}

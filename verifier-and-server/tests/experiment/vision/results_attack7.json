@@ -1,0 +1,161 @@
+{
+ "photos": 150,
+ "summary": [
+  {
+   "attack": "paste",
+   "cells": 8,
+   "copies": 150,
+   "visible": 150,
+   "acceptedStandard": 11,
+   "acceptedStrict": 0,
+   "magY": 72.48715656127543,
+   "content": 0.846889744913132
+  },
+  {
+   "attack": "paste",
+   "cells": 16,
+   "copies": 150,
+   "visible": 150,
+   "acceptedStandard": 1,
+   "acceptedStrict": 0,
+   "magY": 75.60795397973507,
+   "content": 0.860183514218919
+  },
+  {
+   "attack": "paste",
+   "cells": 32,
+   "copies": 150,
+   "visible": 150,
+   "acceptedStandard": 0,
+   "acceptedStrict": 0,
+   "magY": 73.87042702787119,
+   "content": 0.8668516332609502
+  },
+  {
+   "attack": "meanfix",
+   "cells": 8,
+   "copies": 150,
+   "visible": 147,
+   "acceptedStandard": 147,
+   "acceptedStrict": 137,
+   "magY": 26.559333427669465,
+   "content": 0.4864713522041014
+  },
+  {
+   "attack": "meanfix",
+   "cells": 16,
+   "copies": 150,
+   "visible": 145,
+   "acceptedStandard": 142,
+   "acceptedStrict": 128,
+   "magY": 23.35820934507624,
+   "content": 0.41736951464401073
+  },
+  {
+   "attack": "meanfix",
+   "cells": 32,
+   "copies": 150,
+   "visible": 147,
+   "acceptedStandard": 143,
+   "acceptedStrict": 119,
+   "magY": 21.668515810829877,
+   "content": 0.3154868166513914
+  },
+  {
+   "attack": "project",
+   "cells": 8,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 143,
+   "magY": 25.944717273321388,
+   "content": 0.4775093038833788
+  },
+  {
+   "attack": "project",
+   "cells": 16,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 144,
+   "magY": 22.720868732794187,
+   "content": 0.40530458330637814
+  },
+  {
+   "attack": "project",
+   "cells": 32,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 141,
+   "magY": 21.445755201434554,
+   "content": 0.3091171907814244
+  },
+  {
+   "attack": "reencode",
+   "cells": 8,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 144,
+   "magY": 25.827144024039114,
+   "content": 0.4705393233443515
+  },
+  {
+   "attack": "reencode",
+   "cells": 16,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 144,
+   "magY": 22.64470234860689,
+   "content": 0.39492229783032956
+  },
+  {
+   "attack": "reencode",
+   "cells": 32,
+   "copies": 150,
+   "visible": 144,
+   "acceptedStandard": 144,
+   "acceptedStrict": 144,
+   "magY": 21.419168709072338,
+   "content": 0.2962052295350676
+  },
+  {
+   "attack": "oracle",
+   "cells": 8,
+   "copies": 150,
+   "visible": 93,
+   "acceptedStandard": 93,
+   "acceptedStrict": 64,
+   "magY": 18.250980578021203,
+   "content": 0.26189028297216166,
+   "queries": 6.3533333333333335,
+   "meanAlpha": 0.21492919921875
+  },
+  {
+   "attack": "oracle",
+   "cells": 16,
+   "copies": 150,
+   "visible": 69,
+   "acceptedStandard": 69,
+   "acceptedStrict": 40,
+   "magY": 13.813780789597388,
+   "content": 0.1671104908124681,
+   "queries": 6.926666666666667,
+   "meanAlpha": 0.1528516133626302
+  },
+  {
+   "attack": "oracle",
+   "cells": 32,
+   "copies": 150,
+   "visible": 68,
+   "acceptedStandard": 68,
+   "acceptedStrict": 38,
+   "magY": 12.86885092823744,
+   "content": 0.14325926420011645,
+   "queries": 7.593333333333334,
+   "meanAlpha": 0.15151907602945963
+  }
+ ]
+}

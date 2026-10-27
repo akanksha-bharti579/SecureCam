@@ -1,0 +1,223 @@
+{
+ "Korus": {
+  "originals": 220,
+  "forgeries": 220,
+  "visibleForgeries": 220,
+  "copies": 660,
+  "visibleCopies": 660,
+  "cleanCopies": 2200,
+  "modes": {
+   "standard": {
+    "rejectedAllPaths": 188,
+    "rejectedSomePaths": 1,
+    "ci": [
+     80.1874913580768,
+     89.50464808338538
+    ],
+    "markedAllPaths": 179,
+    "cleanAccepted": 2200,
+    "clean": 2200,
+    "falseAccepts": 0,
+    "copiesRejected": 565
+   },
+   "strict": {
+    "rejectedAllPaths": 220,
+    "rejectedSomePaths": 0,
+    "ci": [
+     98.28378639180563,
+     100.0
+    ],
+    "markedAllPaths": 211,
+    "cleanAccepted": 2200,
+    "clean": 2200,
+    "falseAccepts": 0,
+    "copiesRejected": 660
+   }
+  },
+  "standardMissedByArea": {
+   "under1": [
+    21,
+    33
+   ],
+   "1to5": [
+    11,
+    134
+   ],
+   "over5": [
+    0,
+    53
+   ]
+  },
+  "ssimRegionsAuc": 0.9999999999999927,
+  "oursAuc": 0.9977325298271177
+ },
+ "COVERAGE": {
+  "originals": 100,
+  "forgeries": 100,
+  "visibleForgeries": 99,
+  "copies": 300,
+  "visibleCopies": 297,
+  "cleanCopies": 1000,
+  "modes": {
+   "standard": {
+    "rejectedAllPaths": 92,
+    "rejectedSomePaths": 1,
+    "ci": [
+     86.11835734333935,
+     96.53302108717902
+    ],
+    "markedAllPaths": 92,
+    "cleanAccepted": 1000,
+    "clean": 1000,
+    "falseAccepts": 0,
+    "copiesRejected": 277
+   },
+   "strict": {
+    "rejectedAllPaths": 99,
+    "rejectedSomePaths": 0,
+    "ci": [
+     96.26454664260378,
+     100.0
+    ],
+    "markedAllPaths": 98,
+    "cleanAccepted": 1000,
+    "clean": 1000,
+    "falseAccepts": 0,
+    "copiesRejected": 297
+   }
+  },
+  "standardMissedByArea": {
+   "under1": [
+    2,
+    3
+   ],
+   "1to5": [
+    3,
+    16
+   ],
+   "over5": [
+    2,
+    80
+   ]
+  },
+  "ssimRegionsAuc": 1.000000000000003,
+  "oursAuc": 1.000000000000003
+ },
+ "IMD2020": {
+  "originals": 373,
+  "forgeries": 1967,
+  "visibleForgeries": 1940,
+  "copies": 5901,
+  "visibleCopies": 5820,
+  "cleanCopies": 3730,
+  "modes": {
+   "standard": {
+    "rejectedAllPaths": 1874,
+    "rejectedSomePaths": 2,
+    "ci": [
+     95.69470326181673,
+     97.31699069513944
+    ],
+    "markedAllPaths": 826,
+    "cleanAccepted": 3730,
+    "clean": 3730,
+    "falseAccepts": 3,
+    "copiesRejected": 5625
+   },
+   "strict": {
+    "rejectedAllPaths": 1921,
+    "rejectedSomePaths": 0,
+    "ci": [
+     98.47535975602503,
+     99.37211917435697
+    ],
+    "markedAllPaths": 833,
+    "cleanAccepted": 3717,
+    "clean": 3730,
+    "falseAccepts": 0,
+    "copiesRejected": 5763
+   }
+  },
+  "standardMissedByArea": {
+   "under1": [
+    52,
+    179
+   ],
+   "1to5": [
+    13,
+    427
+   ],
+   "over5": [
+    0,
+    482
+   ]
+  },
+  "ssimRegionsAuc": 0.998978280462393,
+  "oursAuc": 0.9981252248543255,
+  "geometry": {
+   "same": {
+    "forgeries": 883,
+    "standard": {
+     "rejectedAllPaths": 823,
+     "markedAllPaths": 690,
+     "copyLabels": {
+      "MODIFIED": 2075,
+      "UNVERIFIED": 397,
+      "AUTHENTIC_COPY": 177
+     }
+    },
+    "strict": {
+     "rejectedAllPaths": 866,
+     "markedAllPaths": 717,
+     "copyLabels": {
+      "MODIFIED": 2153,
+      "UNVERIFIED": 445,
+      "AUTHENTIC_COPY": 51
+     }
+    }
+   },
+   "resized": {
+    "forgeries": 205,
+    "standard": {
+     "rejectedAllPaths": 200,
+     "markedAllPaths": 121,
+     "copyLabels": {
+      "MODIFIED": 363,
+      "UNVERIFIED": 237,
+      "AUTHENTIC_COPY": 15
+     }
+    },
+    "strict": {
+     "rejectedAllPaths": 203,
+     "markedAllPaths": 114,
+     "copyLabels": {
+      "MODIFIED": 342,
+      "UNVERIFIED": 267,
+      "AUTHENTIC_COPY": 6
+     }
+    }
+   },
+   "cropped": {
+    "forgeries": 852,
+    "standard": {
+     "rejectedAllPaths": 851,
+     "markedAllPaths": 15,
+     "copyLabels": {
+      "UNVERIFIED": 2469,
+      "MODIFIED": 84,
+      "AUTHENTIC_COPY": 3
+     }
+    },
+    "strict": {
+     "rejectedAllPaths": 852,
+     "markedAllPaths": 2,
+     "copyLabels": {
+      "UNVERIFIED": 2508,
+      "MODIFIED": 48
+     }
+    }
+   }
+  },
+  "allForgeriesInDataset": 1967
+ }
+}

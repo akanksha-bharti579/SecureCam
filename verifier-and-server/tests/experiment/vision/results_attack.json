@@ -1,0 +1,79 @@
+{
+ "photos": 300,
+ "rows": [
+  {
+   "attack": "size",
+   "cells": 1,
+   "copies": 300,
+   "visible": 275,
+   "acceptedStandard": 275,
+   "acceptedStrict": 231,
+   "meanMagY": 67.33984096011402
+  },
+  {
+   "attack": "size",
+   "cells": 2,
+   "copies": 300,
+   "visible": 272,
+   "acceptedStandard": 263,
+   "acceptedStrict": 161,
+   "meanMagY": 66.51710926676895
+  },
+  {
+   "attack": "size",
+   "cells": 4,
+   "copies": 300,
+   "visible": 288,
+   "acceptedStandard": 192,
+   "acceptedStrict": 64,
+   "meanMagY": 63.16651663418938
+  },
+  {
+   "attack": "size",
+   "cells": 8,
+   "copies": 300,
+   "visible": 287,
+   "acceptedStandard": 72,
+   "acceptedStrict": 3,
+   "meanMagY": 63.40187121442975
+  },
+  {
+   "attack": "paste",
+   "cells": 4,
+   "copies": 300,
+   "visible": 300,
+   "acceptedStandard": 153,
+   "acceptedStrict": 15,
+   "meanMagY": 73.78776810726917
+  },
+  {
+   "attack": "meanfix",
+   "cells": 4,
+   "copies": 300,
+   "visible": 297,
+   "acceptedStandard": 297,
+   "acceptedStrict": 286,
+   "meanMagY": 29.209641082996974,
+   "clippedShare": 0.11388542083767907
+  },
+  {
+   "attack": "paste",
+   "cells": 8,
+   "copies": 300,
+   "visible": 300,
+   "acceptedStandard": 16,
+   "acceptedStrict": 0,
+   "meanMagY": 73.19469843193568
+  },
+  {
+   "attack": "meanfix",
+   "cells": 8,
+   "copies": 300,
+   "visible": 296,
+   "acceptedStandard": 295,
+   "acceptedStrict": 265,
+   "meanMagY": 24.728507377008324,
+   "clippedShare": 0.10987840359690704
+  }
+ ]
+}

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureCam Verifier</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #0f1420;
+            --card: #1a2130;
+            --card-2: #121826;
+            --line: #2b3446;
+            --text: #eef2f7;
+            --muted: #9aa6b8;
+            --primary: #6366f1;
+            --ok-bg: #0b3b2e; --ok: #34d399;
+            --warn-bg: #4a3208; --warn: #fbbf24;
+            --bad-bg: #4c1414; --bad: #f87171;
+            --none-bg: #283042; --none: #cbd5e1;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; background: var(--bg); color: var(--text);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.5;
+        }
+        .wrap { max-width: 880px; margin: 0 auto; padding: 32px 16px 64px; }
+        header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+        h1 { font-size: 1.9rem; margin: 0; letter-spacing: -0.01em; }
+        .sub { color: var(--muted); margin: 2px 0 0; }
+        .registry { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); flex-wrap: wrap; }
+        .registry input { background: var(--card-2); border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 6px 10px; width: 220px; font: inherit; }
+        .dot { width: 9px; height: 9px; border-radius: 50%; background: #64748b; display: inline-block; }
+        .dot.on { background: var(--ok); } .dot.off { background: var(--bad); }
+        button { background: var(--primary); color: white; border: 0; border-radius: 8px; padding: 7px 14px; font: inherit; font-weight: 600; cursor: pointer; }
+        button.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+
+        .drop { background: var(--card); border: 2px dashed #3b4659; border-radius: 16px; padding: 44px 20px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; }
+        .drop:hover, .drop.over { border-color: var(--primary); background: #1d2537; }
+        .drop.compact { padding: 18px; }
+        .drop p { margin: 10px 0 0; color: var(--muted); }
+        .drop svg { width: 52px; height: 52px; color: #7c8aa3; }
+        .drop.compact svg { display: none; }
+        input[type=file] { display: none; }
+
+        .card { background: var(--card); border-radius: 16px; padding: 24px; margin-top: 20px; }
+        .badge { display: inline-block; padding: 6px 14px; border-radius: 999px; font-weight: 800; letter-spacing: .02em; }
+        .ok .badge { background: var(--ok-bg); color: var(--ok); }
+        .warn .badge { background: var(--warn-bg); color: var(--warn); }
+        .bad .badge { background: var(--bad-bg); color: var(--bad); }
+        .none .badge { background: var(--none-bg); color: var(--none); }
+        .card h2 { font-size: 1.25rem; margin: 14px 0 6px; }
+        .card .why { color: var(--muted); margin: 0 0 16px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 20px; background: var(--card-2); border-radius: 12px; padding: 16px; }
+        .k { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+        .v { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .88rem; word-break: break-all; }
+        .checks { list-style: none; padding: 0; margin: 16px 0 0; }
+        .checks li { padding: 6px 0 6px 28px; position: relative; border-top: 1px solid var(--line); }
+        .checks li:first-child { border-top: 0; }
+        .checks li::before { position: absolute; left: 2px; top: 6px; font-weight: 800; }
+        .checks li.y::before { content: "✓"; color: var(--ok); }
+        .checks li.n::before { content: "✗"; color: var(--bad); }
+        .checks li.q::before { content: "?"; color: var(--warn); }
+        .checks li.i::before { content: "•"; color: var(--muted); }
+        figure { margin: 18px 0 0; }
+        canvas.preview { max-width: 100%; border-radius: 10px; display: block; }
+        figcaption { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+        .busy { color: var(--muted); }
+        .chain { margin-top: 18px; }
+        .chain h3 { font-size: 1rem; margin: 0 0 4px; }
+        .chain .lead { color: var(--muted); font-size: .88rem; margin: 0 0 10px; }
+        .step { background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; display: flex; gap: 12px; align-items: flex-start; }
+        .step .ic { flex: 0 0 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .8rem; background: #23304a; color: #c7d2fe; }
+        .step.root .ic { background: #1e3a5f; color: #93c5fd; }
+        .step.dev .ic { background: var(--ok-bg); color: var(--ok); }
+        .step .t { font-weight: 700; }
+        .step .s { color: var(--muted); font-size: .85rem; word-break: break-word; }
+        .link { color: var(--muted); font-size: .8rem; padding: 3px 0 3px 26px; }
+        footer { color: var(--muted); font-size: .8rem; margin-top: 28px; }
+        @media (max-width: 560px) { .registry input { width: 100%; } h1 { font-size: 1.5rem; } }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div>
+                <h1>SecureCam Verifier</h1>
+                <p class="sub">Hardware-backed image provenance — works on originals and on WhatsApp/Instagram copies</p>
+            </div>
+            <div class="registry">
+                <span class="dot" id="reg-dot"></span>
+                <span id="reg-status">Registry</span>
+                <input id="reg-url" aria-label="Registry server URL" spellcheck="false">
+            </div>
+        </header>
+
+        <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose an image to verify">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            <p id="drop-text">Click or drop a photo (original SecureCam file or a copy from any app)</p>
+            <input type="file" id="file" accept="image/*">
+        </div>
+
+        <div id="result"></div>
+
+        <footer>
+            Everything is checked in this browser. This page sends the registry only fingerprint numbers (never your photo), and only when the photo has no signature block of its own. The registry itself holds a 128×128 grey + 32×32 colour thumbnail of each capture, uploaded by the phone.
+        </footer>
+    </div>
+
+    <script src="securecam-core.js"></script>
+    <script>
+        'use strict';
+        const SC = window.SecureCam;
+        const $ = id => document.getElementById(id);
+        const store = {
+            get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+            set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+        };
+
+        // ─── registry connection ───────────────────────────────────────────
+        // Strict mode (open the page with ?strict=1): a region must also keep its structure (regional SSIM),
+        // which catches blur, clones and fills that keep the average colour. Off by default.
+        const COMPARE = { strict: new URLSearchParams(location.search).has('strict') };
+        const DEFAULT_REGISTRY = location.protocol.startsWith('http') ? location.origin : 'http://localhost:8787';
+        let registry = store.get('securecam.registry') || DEFAULT_REGISTRY;
+        $('reg-url').value = registry;
+        $('reg-url').addEventListener('change', e => {
+            registry = e.target.value.trim().replace(/\/+$/, '') || DEFAULT_REGISTRY;
+            e.target.value = registry;
+            store.set('securecam.registry', registry);
+            checkRegistry();
+        });
+
+        async function api(path, body) {
+            const ctl = new AbortController();
+            const t = setTimeout(() => ctl.abort(), 6000);
+            try {
+                const r = await fetch(registry + path, body ? { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: ctl.signal } : { signal: ctl.signal });
+                if (r.status === 404) return null;
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return await r.json();
+            } finally { clearTimeout(t); }
+        }
+
+        async function checkRegistry() {
+            $('reg-dot').className = 'dot';
+            $('reg-status').textContent = 'Registry: checking…';
+            try {
+                const h = await api('/api/health');
+                $('reg-dot').className = 'dot on';
+                $('reg-status').textContent = `Registry online · ${h.records} record${h.records === 1 ? '' : 's'}${h.allowUnattested ? ' · test mode' : ''}`;
+                return true;
+            } catch (e) {
+                $('reg-dot').className = 'dot off';
+                $('reg-status').textContent = 'Registry offline (originals still verify)';
+                return false;
+            }
+        }
+        checkRegistry();
+
+        // ─── file input ────────────────────────────────────────────────────
+        const drop = $('drop');
+        drop.addEventListener('click', () => $('file').click());
+        drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); } });
+        drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
+        drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+        drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); if (e.dataTransfer.files[0]) run(e.dataTransfer.files[0]); });
+        $('file').addEventListener('change', e => { if (e.target.files[0]) run(e.target.files[0]); e.target.value = ''; });
+
+        // ─── image decoding (display orientation, sRGB) ───────────────────
+        async function decode(file) {
+            const bmp = await createImageBitmap(file, { imageOrientation: 'from-image', colorSpaceConversion: 'default', premultiplyAlpha: 'none' });
+            const c = document.createElement('canvas');
+            c.width = bmp.width; c.height = bmp.height;
+            const ctx = c.getContext('2d', { willReadFrequently: true, colorSpace: 'srgb' });
+            ctx.drawImage(bmp, 0, 0);
+            return { bmp, rgba: ctx.getImageData(0, 0, bmp.width, bmp.height).data, w: bmp.width, h: bmp.height };
+        }
+
+        // Map a tile index from the rotated frame back to the received image's frame.
+        function unrotateTile(t, deg) {
+            const n = SC.TILES, r = Math.floor(t / n), c = t % n;
+            if (deg === 90) return (n - 1 - c) * n + r;
+            if (deg === 180) return (n - 1 - r) * n + (n - 1 - c);
+            if (deg === 270) return c * n + (n - 1 - r);
+            return t;
+        }
+
+        // ─── device trust from the registry's attestation result ─────────
+        function trust(keyStatus) {
+            if (keyStatus === undefined) return { state: 'offline', text: 'Registry unreachable — cannot confirm the photo came from a genuine phone' };
+            if (!keyStatus || !keyStatus.known) return { state: 'unknown', text: 'This signing key was never registered — it could be a key made on a computer' };
+            if (!keyStatus.attested) return { state: 'bad', text: 'Device NOT verified: ' + (keyStatus.reasons || []).join('; ') };
+            const d = keyStatus.details || {};
+            const level = d.securityLevel === 'StrongBox' ? 'StrongBox secure chip' : d.securityLevel === 'TrustedEnvironment' ? 'TEE (TrustZone)' : d.securityLevel;
+            const phone = deviceName(d);
+            return { state: 'ok', key: keyStatus, text: `Genuine hardware key (${level})${phone ? ' in a ' + phone : ''} · verified boot · bootloader locked · app ${(d.packages || []).join(', ')} — Android Key Attestation, checked by the registry` };
+        }
+
+        // Brand and model, only when the secure hardware itself attested them.
+        function deviceName(d) {
+            if (!d.deviceBrand && !d.deviceModel) return '';
+            const brand = (d.deviceManufacturer || d.deviceBrand || '').replace(/^\w/, c => c.toUpperCase());
+            return `${brand} ${d.deviceModel || ''}`.trim();
+        }
+        const androidVersion = v => v ? 'Android ' + Math.floor(v / 10000) : '';
+        const patchLevel = v => {
+            if (!v) return '';
+            const s = String(v);
+            return 'security patch ' + new Date(Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, 1)).toLocaleString('en', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+        };
+
+        // "Who vouches for whom": Google's root -> intermediate certificates -> this phone's key -> this photo.
+        function chainOfTrust(keyStatus, photoLine) {
+            const d = keyStatus.details || {};
+            const certs = d.chain || [];
+            const label = c => [c.org, c.name].filter(Boolean).join(' — ') || c.text;
+            const rootCert = certs.find(c => c.role === 'root');
+            const steps = [['root', 'G', 'Google Hardware Attestation Root',
+                'One of the only two roots the registry trusts' + (rootCert ? ` (${rootCert.text})` : d.root ? ` (${d.root})` : '')]];
+            const mids = certs.filter(c => c.role === 'intermediate');
+            if (mids.length) for (const c of mids) steps.push(['', 'CA', label(c), 'Intermediate certificate, signed by the one above']);
+            else if (d.chainLength > 2) steps.push(['', 'CA', `${d.chainLength - 2} intermediate certificate${d.chainLength > 3 ? 's' : ''}`, 'Each signed by the one above and provisioned into this phone\'s secure hardware']);
+            const phone = deviceName(d);
+            const level = d.securityLevel === 'StrongBox' ? 'StrongBox secure chip (Samsung: Knox Vault)' : d.securityLevel === 'TrustedEnvironment' ? 'TEE (TrustZone)' : d.securityLevel;
+            steps.push(['dev', 'KEY', phone ? `Key inside a genuine ${phone}` : 'Key inside a genuine phone',
+                [level, d.verifiedBootState === 'Verified' ? 'verified boot' : '', d.deviceLocked ? 'bootloader locked' : '',
+                 androidVersion(d.osVersion), patchLevel(d.osPatchLevel), (d.packages || []).length ? 'app ' + d.packages.join(', ') : '',
+                 phone && d.deviceIdsHardwareEnforced ? 'brand and model reported by the secure hardware' : ''].filter(Boolean).join(' · ')]);
+            steps.push(['dev', '✓', 'This photo', photoLine]);
+            let html = '<div class="chain"><h3>Chain of trust</h3><p class="lead">Each certificate signs the one below it, starting from Google. A key made on a computer, an emulator or a rooted phone cannot get such a chain.</p>';
+            steps.forEach(([cls, ic, t, sub], i) => {
+                if (i) html += `<div class="link">↓ ${i === steps.length - 1 ? 'signed this photo at the moment of capture' : 'vouches for'}</div>`;
+                html += `<div class="step ${cls}"><div class="ic">${escapeHtml(ic)}</div><div><div class="t">${escapeHtml(t)}</div><div class="s">${escapeHtml(sub)}</div></div></div>`;
+            });
+            return html + '</div>';
+        }
+
+        // ─── verification ─────────────────────────────────────────────────
+        async function run(file) {
+            drop.classList.add('compact');
+            $('drop-text').textContent = 'Verify another photo';
+            $('result').innerHTML = '<div class="card busy">Verifying ' + escapeHtml(file.name) + '…</div>';
+            try {
+                render(await verify(file), file);
+            } catch (e) {
+                console.error(e);
+                render({ level: 'none', badge: 'ERROR', title: 'Could not check this file', why: e.message, checks: [], details: [] }, file);
+            }
+        }
+
+        async function verify(file) {
+            const bytes = new Uint8Array(await file.arrayBuffer());
+            const checks = [], details = [];
+            const tr = SC.parseTrailer(bytes);
+
+            if (tr && tr.version === 2) {
+                checks.push(['y', 'SecureCam v2 signature block found after the image data']);
+                const r = await SC.verifyTrailerV2(bytes, tr);
+                if (r.status === 'INVALID' || r.status === 'FORGED_BLOCK') {
+                    checks.push(['n', r.status === 'INVALID' ? 'Signature block is damaged: ' + r.reason : 'Signature block was altered: ' + r.reason]);
+                    return { level: 'bad', badge: 'TAMPERED', title: 'The signature block has been altered', why: 'Someone edited the embedded proof itself, so nothing in this file can be trusted.', checks, details };
+                }
+                const m = r.manifest;
+                checks.push(['y', `Signature valid for key ${r.keyId.slice(0, 16)}…`]);
+                addManifestDetails(details, m, r.keyId);
+                details.push(['File SHA-256 (now)', r.fileSha256]);
+                const rid = (await SC.sha256Hex(tr.manifest)).slice(0, 32);
+                let keyStatus, rec;
+                try { keyStatus = await api('/api/keys/' + r.keyId); rec = await api('/api/records/' + rid); } catch (e) { keyStatus = undefined; }
+                if (rec) details.push(['Registered with server', fmtTime(rec.receivedAt) + ' (independent timestamp)']);
+                const t = trust(keyStatus);
+
+                if (r.status === 'TAMPERED') {
+                    checks.push(['n', 'File bytes do NOT match the signed SHA-256 — the image was changed after capture']);
+                    const heat = await tamperMap(file, r.thumbs, 0);
+                    if (heat) checks.push(['i', heat.changed.length ? `${heat.changed.length} of 256 regions differ from the signed thumbnail (marked red)` : 'Changes are too small to localise; the byte check still proves tampering']);
+                    return { level: 'bad', badge: 'TAMPERED', title: 'This file was changed after it was captured', why: 'The signature is genuine, but the image data no longer matches what was signed.', checks, details, heat };
+                }
+                checks.push(['y', 'File bytes match the signed SHA-256 exactly']);
+                checks.push([t.state === 'ok' ? 'y' : t.state === 'bad' ? 'n' : 'q', t.text]);
+                if (t.state === 'ok') return { level: 'ok', badge: 'AUTHENTIC', title: 'Original file, unchanged since capture', why: 'Signed inside the phone\'s secure hardware at the moment of capture; every byte is intact.', checks, details, trustKey: t.key, photoLine: 'Signature valid, and every byte of this file is unchanged' };
+                return { level: 'warn', badge: 'SIGNATURE VALID — DEVICE NOT VERIFIED', title: 'Unchanged since signing, but the signer is unproven', why: 'The file matches its signature, but the key could not be shown to live in a genuine phone\'s secure hardware.', checks, details };
+            }
+
+            if (tr && tr.version === 1) {
+                checks.push(['y', 'SecureCam v1 (Review-2 app) signature block found']);
+                const r = await SC.verifyTrailerV1(bytes, tr);
+                details.push(['Signing key', r.keyId], ['File SHA-256', r.fileSha256]);
+                if (r.status === 'TAMPERED') { checks.push(['n', 'Signature does not match the image bytes']); return { level: 'bad', badge: 'TAMPERED', title: 'This file was changed after it was signed', why: 'v1 signature check failed.', checks, details }; }
+                checks.push(['y', 'Signature matches the image bytes']);
+                checks.push(['q', 'v1 files carry no device attestation, so the signer cannot be proven to be a phone']);
+                return { level: 'warn', badge: 'SIGNATURE VALID (v1)', title: 'Unchanged since signing (legacy format)', why: 'Retake the photo with the v2 app for device-verified provenance.', checks, details };
+            }
+
+            if (tr && tr.malformed) {
+                checks.push(['n', 'A SecureCam block is present but unreadable']);
+                return { level: 'bad', badge: 'TAMPERED', title: 'The signature block is damaged', why: 'The embedded proof was edited or corrupted.', checks, details };
+            }
+
+            // No block: a platform re-encoded the photo (or it never was a SecureCam photo).
+            checks.push(['i', 'No signature block (normal for WhatsApp, Instagram, screenshots…) — checking the registry']);
+            let img;
+            try { img = await decode(file); } catch (e) { throw new Error('this file could not be decoded as an image'); }
+            if (Math.min(img.w, img.h) < SC.N) return { level: 'none', badge: 'UNVERIFIED', title: 'Image too small to check', why: `At least ${SC.N} px on each side is needed.`, checks, details };
+            const thumbs = SC.thumbnailsFromRGBA(img.rgba, img.w, img.h);
+            const queries = SC.lookupQueries(thumbs);
+            let res;
+            try { res = await api('/api/lookup', { queries: queries.map(q => ({ phash: q.phash, quads: q.quads })) }); }
+            catch (e) {
+                checks.push(['q', 'Registry unreachable (' + registry + ')']);
+                return { level: 'none', badge: 'UNVERIFIED', title: 'No proof available offline', why: 'This copy has no embedded signature and the registry could not be reached.', checks, details };
+            }
+            const cands = (res && res.candidates) || [];
+            checks.push(['i', `Registry returned ${cands.length} candidate record${cands.length === 1 ? '' : 's'}`]);
+            let best = null;
+            for (const c of cands) {
+                const v = await SC.verifyRegistryRecord(c.record);
+                if (!v.ok) { checks.push(['n', 'Ignored a registry record whose signature does not verify']); continue; }
+                const deg = queries[c.query].deg;
+                const cmp = SC.compareThumbs(v.thumbs, SC.rotateThumbs(thumbs, deg), COMPARE);
+                const rank = cmp.verdict === 'MATCH' ? 0 : cmp.verdict === 'MODIFIED' ? 1 : 2;
+                if (!best || rank < best.rank || (rank === best.rank && cmp.changed.length < best.cmp.changed.length)) best = { rank, cmp, v, c, deg };
+            }
+            if (!best || best.rank === 2) {
+                return { level: 'none', badge: 'UNVERIFIED', title: 'No matching signed capture', why: 'This picture was not captured with SecureCam, or it was cropped/changed too much to recognise.', checks, details };
+            }
+            const m = best.v.manifest;
+            addManifestDetails(details, m, m.key);
+            details.push(['Registered with server', fmtTime(best.c.record.receivedAt) + ' (independent timestamp)']);
+            details.push(['This copy', `${img.w} × ${img.h} px${best.deg ? `, rotated ${best.deg}°` : ''}`]);
+            checks.push(['y', `Matched record ${best.c.record.rid.slice(0, 12)}… (pHash distance ${best.c.distance}/64); its signature verified in this browser`]);
+            const t = trust(best.c.record.key);
+            if (best.rank === 1) {
+                const changed = best.cmp.changed.map(x => unrotateTile(x, best.deg));
+                checks.push(['n', `${changed.length} of 256 regions differ from the signed capture (marked red)`]);
+                checks.push([t.state === 'ok' ? 'y' : 'q', t.text]);
+                return { level: 'bad', badge: 'MODIFIED', title: 'A copy of a signed photo, with parts changed', why: 'The rest of the picture matches a signed capture, but the marked regions were altered.', checks, details, heat: { bmp: img.bmp, changed } };
+            }
+            checks.push(['y', 'All 256 regions match the signed capture (differences within normal recompression)' + (COMPARE.strict ? '; strict mode: structure also checked' : '')]);
+            checks.push([t.state === 'ok' ? 'y' : t.state === 'bad' ? 'n' : 'q', t.text]);
+            if (t.state === 'ok') return { level: 'ok', badge: 'AUTHENTIC COPY', title: 'Recompressed copy of an authentic capture', why: 'The file was re-encoded (e.g. by WhatsApp), but its visible content matches what the phone signed. Byte-exact proof needs the original file.', checks, details, heat: { bmp: img.bmp, changed: [] }, trustKey: t.key, photoLine: 'Signed record verified in this browser; all 256 regions of this copy match it' };
+            return { level: 'warn', badge: 'MATCHES — DEVICE NOT VERIFIED', title: 'Matches a signed capture, but the signer is unproven', why: t.text, checks, details, heat: { bmp: img.bmp, changed: [] } };
+        }
+
+        async function tamperMap(file, signedThumbs, deg) {
+            try {
+                const img = await decode(file);
+                if (Math.min(img.w, img.h) < SC.N) return null;
+                const cmp = SC.compareThumbs(signedThumbs, SC.rotateThumbs(SC.thumbnailsFromRGBA(img.rgba, img.w, img.h), deg), COMPARE);
+                return { bmp: img.bmp, changed: cmp.changed };
+            } catch (e) { return null; } // too damaged to decode
+        }
+
+        function addManifestDetails(details, m, keyId) {
+            details.push(['Captured (phone clock)', fmtTime(m.captured)]);
+            details.push(['Signing key', `${keyId.slice(0, 16)}… · ${m.sec}`]);
+            details.push(['Original size', `${m.fp.w} × ${m.fp.h} px`]);
+            details.push(['Signed file SHA-256', m.file_sha256]);
+        }
+
+        // ─── rendering ────────────────────────────────────────────────────
+        function render(r, file) {
+            const box = document.createElement('div');
+            box.className = 'card ' + r.level;
+            box.innerHTML = `<span class="badge">${escapeHtml(r.badge)}</span><h2>${escapeHtml(r.title)}</h2><p class="why">${escapeHtml(r.why || '')}</p>`;
+            if (r.details.length) {
+                const g = document.createElement('div');
+                g.className = 'grid';
+                for (const [k, v] of r.details) g.insertAdjacentHTML('beforeend', `<div><div class="k">${escapeHtml(k)}</div><div class="v">${escapeHtml(v)}</div></div>`);
+                box.appendChild(g);
+            }
+            if (r.checks.length) {
+                const ul = document.createElement('ul');
+                ul.className = 'checks';
+                for (const [cls, text] of r.checks) ul.insertAdjacentHTML('beforeend', `<li class="${cls}">${escapeHtml(text)}</li>`);
+                box.appendChild(ul);
+            }
+            if (r.trustKey) box.insertAdjacentHTML('beforeend', chainOfTrust(r.trustKey, r.photoLine));
+            const fig = document.createElement('figure');
+            box.appendChild(fig);
+            $('result').replaceChildren(box);
+            drawPreview(fig, r.heat, file);
+        }
+
+        async function drawPreview(fig, heat, file) {
+            let bmp = heat && heat.bmp;
+            if (!bmp) { try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (e) { return; } }
+            const scale = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+            const c = document.createElement('canvas');
+            c.className = 'preview';
+            c.width = Math.round(bmp.width * scale); c.height = Math.round(bmp.height * scale);
+            const ctx = c.getContext('2d');
+            ctx.drawImage(bmp, 0, 0, c.width, c.height);
+            if (heat && heat.changed.length) {
+                const n = SC.TILES, tw = c.width / n, th = c.height / n;
+                ctx.fillStyle = 'rgba(248,113,113,0.38)'; ctx.strokeStyle = 'rgba(248,113,113,0.95)'; ctx.lineWidth = 2;
+                for (const t of heat.changed) {
+                    const x = (t % n) * tw, y = Math.floor(t / n) * th;
+                    ctx.fillRect(x, y, tw, th); ctx.strokeRect(x + 1, y + 1, tw - 2, th - 2);
+                }
+            }
+            fig.appendChild(c);
+            if (heat && heat.changed.length) fig.insertAdjacentHTML('beforeend', '<figcaption>Red regions differ from what the phone signed.</figcaption>');
+        }
+
+        function fmtTime(iso) {
+            const d = new Date(iso);
+            return isNaN(d) ? String(iso) : d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'long' });
+        }
+        function escapeHtml(s) { return String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
+    </script>
+</body>
+
+</html>

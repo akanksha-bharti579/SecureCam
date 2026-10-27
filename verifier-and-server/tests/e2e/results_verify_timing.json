@@ -1,0 +1,173 @@
+{
+ "1_original.jpg": {
+  "label": "Original 3060x4080 (2.5 MB)",
+  "std": {
+   "median": 25.049999999813735,
+   "p90": 46.90000000037253,
+   "min": 19.59999999962747,
+   "max": 61.29999999888241,
+   "n": 10,
+   "badge": "AUTHENTIC"
+  },
+  "strict": {
+   "median": 32.049999999813735,
+   "p90": 52.19999999925494,
+   "min": 19.90000000037253,
+   "max": 55.19999999925494,
+   "n": 10,
+   "badge": "AUTHENTIC"
+  }
+ },
+ "1b_original_photo_B.jpg": {
+  "label": "Original (photo B)",
+  "std": {
+   "median": 21.84999999869615,
+   "p90": 24.100000001490116,
+   "min": 20.899999998509884,
+   "max": 25.40000000037253,
+   "n": 10,
+   "badge": "AUTHENTIC"
+  },
+  "strict": {
+   "median": 24.050000000745058,
+   "p90": 25.600000001490116,
+   "min": 21,
+   "max": 26,
+   "n": 10,
+   "badge": "AUTHENTIC"
+  }
+ },
+ "2a_whatsapp_real.jpg": {
+  "label": "WhatsApp copy 960x1280",
+  "std": {
+   "median": 44.799999999813735,
+   "p90": 50,
+   "min": 38,
+   "max": 59.19999999925494,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  },
+  "strict": {
+   "median": 48.299999999813735,
+   "p90": 50.80000000074506,
+   "min": 39.90000000037253,
+   "max": 57.19999999925494,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  }
+ },
+ "2b_signal_real.jpg": {
+  "label": "Signal copy 3060x4080",
+  "std": {
+   "median": 265.54999999981374,
+   "p90": 285.5,
+   "min": 220.19999999925494,
+   "max": 286.2999999988824,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  },
+  "strict": {
+   "median": 253.45000000018626,
+   "p90": 308.19999999925494,
+   "min": 225.59999999962747,
+   "max": 313,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  }
+ },
+ "2c_telegram_real_of_photo_B.jpg": {
+  "label": "Telegram copy 960x1280",
+  "std": {
+   "median": 42.50000000093132,
+   "p90": 52.29999999888241,
+   "min": 40.19999999925494,
+   "max": 57.29999999888241,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  },
+  "strict": {
+   "median": 41.299999999813735,
+   "p90": 58.30000000074506,
+   "min": 39,
+   "max": 61.40000000037253,
+   "n": 10,
+   "badge": "AUTHENTIC COPY"
+  }
+ },
+ "3_edited_then_shared_sim.jpg": {
+  "label": "Edited copy 1200x1600",
+  "std": {
+   "median": 48.74999999906868,
+   "p90": 55.09999999962747,
+   "min": 43.59999999962747,
+   "max": 66,
+   "n": 10,
+   "badge": "MODIFIED"
+  },
+  "strict": {
+   "median": 47.34999999962747,
+   "p90": 57.5,
+   "min": 45,
+   "max": 91.39999999850988,
+   "n": 10,
+   "badge": "MODIFIED"
+  }
+ },
+ "4_tampered_one_byte.jpg": {
+  "label": "Tampered original",
+  "std": {
+   "median": 379.8999999994412,
+   "p90": 392.69999999925494,
+   "min": 357.40000000037253,
+   "max": 422,
+   "n": 10,
+   "badge": "TAMPERED"
+  },
+  "strict": {
+   "median": 371.09999999962747,
+   "p90": 401.80000000074506,
+   "min": 357.59999999962747,
+   "max": 430.5,
+   "n": 10,
+   "badge": "TAMPERED"
+  }
+ },
+ "5_hacker_resigned.jpg": {
+  "label": "Laptop-signed original",
+  "std": {
+   "median": 20.450000000186265,
+   "p90": 30.799999998882413,
+   "min": 18.899999998509884,
+   "max": 43.40000000037253,
+   "n": 10,
+   "badge": "SIGNATURE VALID \u00e2\u20ac\u201d DEVICE NOT VERIFIED"
+  },
+  "strict": {
+   "median": 20.299999999813735,
+   "p90": 27.59999999962747,
+   "min": 18.800000000745058,
+   "max": 31.09999999962747,
+   "n": 10,
+   "badge": "SIGNATURE VALID \u00e2\u20ac\u201d DEVICE NOT VERIFIED"
+  }
+ },
+ "6_normal_photo.jpg": {
+  "label": "Unsigned photo 1920x2560",
+  "std": {
+   "median": 172.75000000093132,
+   "p90": 181.30000000074506,
+   "min": 165.09999999962747,
+   "max": 196.40000000037253,
+   "n": 10,
+   "badge": "UNVERIFIED"
+  },
+  "strict": {
+   "median": 175.8999999994412,
+   "p90": 183.80000000074506,
+   "min": 166.7000000011176,
+   "max": 203.09999999962747,
+   "n": 10,
+   "badge": "UNVERIFIED"
+  }
+ }
+}

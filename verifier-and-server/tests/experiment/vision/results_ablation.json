@@ -1,0 +1,136 @@
+{
+ "variants": {
+  "Full system": {
+   "auc": 0.9773181998598366,
+   "scale": 0.7631989585028754,
+   "frozen": {
+    "clean": 8905,
+    "cleanOk": 8904,
+    "vis": 11928,
+    "caught": 10132,
+    "falseAccept": 0,
+    "modifiedOwn": 10126
+   },
+   "calibrated": {
+    "clean": 8905,
+    "cleanOk": 8901,
+    "vis": 11928,
+    "caught": 10505,
+    "falseAccept": 0,
+    "modifiedOwn": 10499
+   },
+   "operatingPoints": {
+    "0.999": 0.8855633802816901,
+    "0.995": 0.8948692152917505,
+    "0.99": 0.903420523138833
+   }
+  },
+  "Without chroma check": {
+   "auc": 0.9649006004961078,
+   "scale": 0.7631989585028754,
+   "frozen": {
+    "clean": 8905,
+    "cleanOk": 8904,
+    "vis": 11928,
+    "caught": 9370,
+    "falseAccept": 0,
+    "modifiedOwn": 9364
+   },
+   "calibrated": {
+    "clean": 8905,
+    "cleanOk": 8901,
+    "vis": 11928,
+    "caught": 9797,
+    "falseAccept": 0,
+    "modifiedOwn": 9791
+   },
+   "operatingPoints": {
+    "0.999": 0.8264587525150905,
+    "0.995": 0.8383635144198525,
+    "0.99": 0.8505197853789404
+   }
+  },
+  "Without quadrant lookup": {
+   "auc": 0.9773181998598366,
+   "scale": 0.7631989585028754,
+   "frozen": {
+    "clean": 8905,
+    "cleanOk": 8904,
+    "vis": 11928,
+    "caught": 10132,
+    "falseAccept": 0,
+    "modifiedOwn": 9750
+   },
+   "calibrated": {
+    "clean": 8905,
+    "cleanOk": 8901,
+    "vis": 11928,
+    "caught": 10505,
+    "falseAccept": 0,
+    "modifiedOwn": 10123
+   },
+   "operatingPoints": {
+    "0.999": 0.8855633802816901,
+    "0.995": 0.8948692152917505,
+    "0.99": 0.903420523138833
+   }
+  },
+  "Without neighbourhood tolerance": {
+   "auc": 0.9933933283398689,
+   "scale": 1.429446644253201,
+   "frozen": {
+    "clean": 8905,
+    "cleanOk": 8657,
+    "vis": 11928,
+    "caught": 11361,
+    "falseAccept": 0,
+    "modifiedOwn": 11355
+   },
+   "calibrated": {
+    "clean": 8905,
+    "cleanOk": 8875,
+    "vis": 11928,
+    "caught": 10885,
+    "falseAccept": 0,
+    "modifiedOwn": 10879
+   },
+   "operatingPoints": {
+    "0.999": 0.9028336686787392,
+    "0.995": 0.9220321931589537,
+    "0.99": 0.9302481556002683
+   }
+  },
+  "Without contrast/brightness adjustment": {
+   "auc": 0.9772540398671271,
+   "scale": 0.7604166666666666,
+   "frozen": {
+    "clean": 8905,
+    "cleanOk": 8904,
+    "vis": 11928,
+    "caught": 10133,
+    "falseAccept": 0,
+    "modifiedOwn": 10127
+   },
+   "calibrated": {
+    "clean": 8905,
+    "cleanOk": 8901,
+    "vis": 11928,
+    "caught": 10511,
+    "falseAccept": 0,
+    "modifiedOwn": 10505
+   },
+   "operatingPoints": {
+    "0.999": 0.8858987256874581,
+    "0.995": 0.8941985244802146,
+    "0.99": 0.9042588866532528
+   }
+  }
+ },
+ "lookupOnly": {
+  "clean": 8905,
+  "cleanOk": 8905,
+  "vis": 11928,
+  "caught": 374,
+  "falseAccept": 12
+ }
+}
